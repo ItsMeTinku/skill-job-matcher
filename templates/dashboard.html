@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Welcome, {{ user[1] }}</h2>
+
+<!-- SKILLS -->
+<div class="card p-3 mb-3">
+    <h5>Your Skills</h5>
+
+    {% for skill in skills %}
+        <span class="badge bg-secondary">{{ skill }}</span>
+    {% endfor %}
+
+    <form method="POST" enctype="multipart/form-data" class="mt-2">
+        
+        <!-- EDITABLE FIELD -->
+        <input class="form-control mb-2" name="skills" 
+               value="{{ user[4] }}" 
+               placeholder="Edit your skills">
+
+        <textarea class="form-control mb-2" name="resume" placeholder="Paste resume text"></textarea>
+
+        <input type="file" name="cv_file" class="form-control mb-2">
+
+        <button class="btn btn-warning">Update</button>
+    </form>
+</div>
+
+<!-- TOP JOBS -->
+<h4>Top Matches</h4>
+{% for job in top_jobs %}
+<div class="alert alert-success">
+    {{ job.job }} - {{ job.percentage }}%
+</div>
+{% endfor %}
+
+<!-- SEARCH -->
+<input type="text" id="jobSearch" class="form-control mb-3" placeholder="Search job...">
+
+<!-- ALL JOBS -->
+<div id="jobList">
+{% for job in matches %}
+<div class="card p-2 mb-2 {% if job.percentage > 70 %}border-success{% endif %}">
+    
+    <h5>{{ job.job }}</h5>
+
+    <div class="progress mb-2">
+        <div class="progress-bar" style="width: {{ job.percentage }}%">
+            {{ job.percentage }}%
+        </div>
+    </div>
+
+    <!-- SKILLS YOU HAVE -->
+    <p><b>Skills You Have:</b></p>
+    {% for skill in job.matched %}
+        <span class="badge bg-success m-1">{{ skill }}</span>
+    {% endfor %}
+
+    <!-- SKILLS NEEDED -->
+    <p><b>Skills Needed:</b></p>
+    {% for skill in job.missing %}
+        <span class="badge bg-danger m-1">{{ skill }}</span>
+    {% endfor %}
+
+</div>
+{% endfor %}
+</div>
+
+<!-- SUGGESTIONS -->
+<h4>Recommended Skills</h4>
+{% for skill in suggestions[:10] %}
+<span class="badge bg-primary">{{ skill }}</span>
+{% endfor %}
+
+<!-- IMPROVEMENT -->
+<h4>Improvement</h4>
+<p>Previous: {{ user[5] }}</p>
+<p>Current: {{ user[6] }}</p>
+<p>Change: {{ improvement }}</p>
+
+<!-- GRAPH -->
+<canvas id="chart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+new Chart(document.getElementById("chart"), {
+    type: 'bar',
+    data: {
+        labels: ['Previous', 'Current'],
+        datasets: [{
+            data: [{{ user[5] }}, {{ user[6] }}]
+        }]
+    }
+});
+
+// SEARCH
+document.getElementById("jobSearch").addEventListener("keyup", function() {
+    let value = this.value.toLowerCase();
+    let jobs = document.querySelectorAll("#jobList .card");
+
+    jobs.forEach(job => {
+        let text = job.innerText.toLowerCase();
+        job.style.display = text.includes(value) ? "" : "none";
+    });
+});
+</script>
+
+<br>
+<a href="/logout" class="btn btn-danger">Logout</a>
+
+{% endblock %}
