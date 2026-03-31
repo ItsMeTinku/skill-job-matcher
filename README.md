@@ -3,7 +3,6 @@
 ## 🌐 Live Demo
 👉 [Open Live Website](https://skill-job-matcher.onrender.com)
 
-## 📌 Project Overview
 ...
 ## 📌 Project Overview
 
