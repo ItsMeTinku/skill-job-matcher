@@ -62,7 +62,7 @@ skill_job_match/
 ### 1. Clone Repository
 
 ```
-git clone https://github.com/YOUR_USERNAME/skill-job-matcher.git
+git clone https://github.com/ItsMeTinku/skill-job-matcher.git
 cd skill-job-matcher
 ```
 
