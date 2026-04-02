@@ -155,8 +155,25 @@ def update_skills():
     if 'user_id' not in session:
         return redirect(url_for('login'))
 
-    skills = request.form.get('skills', '').strip().lower()
-    skill_list = [s.strip() for s in skills.split(",") if s.strip()]
+    # manual skills
+    skills_input = request.form.get('skills', '').lower()
+
+    # resume text
+    resume_text = request.form.get('resume', '').lower()
+
+    # predefined skill keywords
+    skill_keywords = [
+        "python", "flask", "django", "html", "css", "javascript",
+        "bootstrap", "sql", "api", "pandas", "numpy", "ml",
+        "react", "docker", "linux", "aws"
+    ]
+
+    # extract skills from resume
+    extracted_skills = [skill for skill in skill_keywords if skill in resume_text]
+
+    # combine both
+    manual_skills = [s.strip() for s in skills_input.split(",") if s.strip()]
+    all_skills = list(set(manual_skills + extracted_skills))
 
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
@@ -164,8 +181,9 @@ def update_skills():
     c.execute("SELECT current_score FROM users WHERE id=?", (session['user_id'],))
     old_score = c.fetchone()[0] or 0
 
-    new_score = len(skill_list) * 10
-    updated_skills = ", ".join(skill_list)
+    new_score = len(all_skills) * 10
+
+    updated_skills = ", ".join(all_skills)
 
     c.execute("""
         UPDATE users
@@ -177,7 +195,6 @@ def update_skills():
     conn.close()
 
     return redirect(url_for('dashboard'))
-
 
 # ---------------- FILE UPLOAD ----------------
 @app.route('/upload', methods=['POST'])
