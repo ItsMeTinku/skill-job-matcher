@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mb-3">Welcome, {{ user[1] }}</h2>
+
+<!-- SKILLS -->
+<div class="card p-3 mb-3">
+    <h5>Your Skills</h5>
+
+    {% if skills %}
+        {% for skill in skills %}
+            <span class="badge bg-secondary m-1">{{ skill }}</span>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">No skills added yet</p>
+    {% endif %}
+
+    <!-- ✅ FIXED FORM -->
+    <form method="POST" action="/update_skills" enctype="multipart/form-data" class="mt-3">
+
+        <input class="form-control mb-2" name="skills" 
+               value="{{ user[4] }}" 
+               placeholder="Edit your skills (comma separated)">
+
+        <textarea class="form-control mb-2" name="resume" placeholder="Paste resume text (optional)"></textarea>
+
+        <input type="file" name="cv_file" class="form-control mb-2">
+
+        <button class="btn btn-warning w-100">Update Skills</button>
+    </form>
+</div>
+
+<!-- TOP JOB -->
+{% if top_jobs %}
+<div class="alert alert-success">
+    ⭐ <b>Top Recommended Job:</b> {{ top_jobs[0].job }} ({{ top_jobs[0].percentage }}%)
+</div>
+{% endif %}
+
+<!-- SEARCH -->
+<input type="text" id="jobSearch" class="form-control mb-3" placeholder="🔍 Search job...">
+
+<!-- JOB LIST -->
+<div id="jobList">
+{% for job in matches %}
+
+<div class="card p-3 mb-3 {% if job.percentage > 70 %}border-success{% endif %}">
+    
+    <h5>
+        {{ job.job }}
+        {% if job.percentage > 70 %}
+            <span class="badge bg-success">High Match</span>
+        {% endif %}
+    </h5>
+
+    <div class="progress mb-2">
+        <div class="progress-bar bg-success" style="width: {{ job.percentage }}%">
+            {{ job.percentage }}%
+        </div>
+    </div>
+
+    <p class="mb-1"><b>✔ Skills You Have:</b></p>
+    {% if job.matched %}
+        {% for skill in job.matched %}
+            <span class="badge bg-success m-1">{{ skill }}</span>
+        {% endfor %}
+    {% else %}
+        <span class="text-muted">None</span>
+    {% endif %}
+
+    <p class="mt-2 mb-1"><b>❌ Skills Needed:</b></p>
+    {% if job.missing %}
+        {% for skill in job.missing %}
+            <span class="badge bg-danger m-1">{{ skill }}</span>
+        {% endfor %}
+    {% else %}
+        <span class="text-success">All skills matched 🎉</span>
+    {% endif %}
+
+</div>
+
+{% endfor %}
+</div>
+
+<p id="noResult" class="text-danger" style="display:none;">No jobs found</p>
+
+<h4 class="mt-4">Recommended Skills</h4>
+{% if suggestions %}
+    {% for skill in suggestions[:10] %}
+        <span class="badge bg-primary m-1">{{ skill }}</span>
+    {% endfor %}
+{% else %}
+    <p class="text-muted">No suggestions available</p>
+{% endif %}
+
+<h4 class="mt-4">Improvement</h4>
+<p><b>Previous:</b> {{ user[5] }}</p>
+<p><b>Current:</b> {{ user[6] }}</p>
+<p><b>Change:</b> {{ improvement }}</p>
+
+<canvas id="chart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+new Chart(document.getElementById("chart"), {
+    type: 'bar',
+    data: {
+        labels: ['Previous', 'Current'],
+        datasets: [{
+            label: "Score",
+            data: [{{ user[5] }}, {{ user[6] }}]
+        }]
+    }
+});
+
+document.getElementById("jobSearch").addEventListener("keyup", function() {
+    let value = this.value.toLowerCase();
+    let jobs = document.querySelectorAll("#jobList .card");
+    let found = false;
+
+    jobs.forEach(job => {
+        let text = job.innerText.toLowerCase();
+        if (text.includes(value)) {
+            job.style.display = "";
+            found = true;
+        } else {
+            job.style.display = "none";
+        }
+    });
+
+    document.getElementById("noResult").style.display = found ? "none" : "block";
+});
+</script>
+
+<br>
+<a href="/logout" class="btn btn-danger w-100">Logout</a>
+
+{% endblock %}
