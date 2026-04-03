@@ -84,11 +84,19 @@ def login():
         user = c.fetchone()
         conn.close()
 
-        if user and check_password_hash(user[3], password):
-            session['user_id'] = user[0]
-            return redirect(url_for('dashboard'))
-        else:
-            flash("Invalid credentials!")
+        # Email not found
+        if not user:
+            flash("User not found! Please register first.")
+            return redirect(url_for('login'))
+
+        # Wrong password
+        if not check_password_hash(user[3], password):
+            flash("Email or password is incorrect!")
+            return redirect(url_for('login'))
+
+        # Success
+        session['user_id'] = user[0]
+        return redirect(url_for('dashboard'))
 
     return render_template('login.html')
 
