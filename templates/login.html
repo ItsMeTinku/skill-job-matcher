@@ -2,6 +2,15 @@
 {% block content %}
 
 <h3>Login</h3>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for msg in messages %}
+      <div class="alert alert-danger">{{ msg }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<form method="POST">
 <form method="POST">
     <input class="form-control mb-2" name="email" placeholder="Email" required>
     <input class="form-control mb-2" name="password" type="password" placeholder="Password" required>
@@ -11,3 +20,4 @@
 <a href="/register">Register</a>
 
 {% endblock %}
+
