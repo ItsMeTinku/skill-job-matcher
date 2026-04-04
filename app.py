@@ -35,7 +35,6 @@ def init_db():
 init_db()
 
 
-# ---------------- REGISTER ----------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -52,26 +51,31 @@ def register():
             flash("Password must be at least 6 characters!")
             return redirect(url_for('register'))
 
+        conn = sqlite3.connect('database.db')
+        c = conn.cursor()
+
+        # check if user exists
+        c.execute("SELECT * FROM users WHERE email=?", (email,))
+        existing_user = c.fetchone()
+
+        if existing_user:
+            flash("Email already exists! Please login.")
+            conn.close()
+            return redirect(url_for('register'))
+
         hashed_password = generate_password_hash(password)
 
-        try:
-            conn = sqlite3.connect('database.db')
-            c = conn.cursor()
-            c.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-                      (name, email, hashed_password))
-            conn.commit()
-            conn.close()
+        c.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+                  (name, email, hashed_password))
+        conn.commit()
+        conn.close()
 
-            flash("Registration successful!")
-            return redirect(url_for('login'))
-        except:
-            flash("Email already exists!")
-            return redirect(url_for('register'))
+        flash("Registration successful! Please login.")
+        return redirect(url_for('login'))
 
     return render_template('register.html')
 
 
-# ---------------- LOGIN ----------------
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -84,17 +88,14 @@ def login():
         user = c.fetchone()
         conn.close()
 
-        # Email not found
         if not user:
             flash("User not found! Please register first.")
             return redirect(url_for('login'))
 
-        # Wrong password
         if not check_password_hash(user[3], password):
             flash("Email or password is incorrect!")
             return redirect(url_for('login'))
 
-        # Success
         session['user_id'] = user[0]
         return redirect(url_for('dashboard'))
 
