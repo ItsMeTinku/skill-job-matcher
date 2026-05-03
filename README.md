@@ -1,4 +1,4 @@
-# 🎯 Skill + Job Matching System (Flask Web App)
+# 🚀 AI Skill Job Matcher – Intelligent Career Gap Analysis & Job Recommendation System
 
 ## 🌐 Live Demo
 👉 [Open Live Website](https://skill-job-matcher.onrender.com)
