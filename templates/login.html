@@ -1,20 +1,56 @@
-<h2>Login</h2>
+{% extends 'base.html' %}
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for msg in messages %}
-      <div class="alert alert-danger">{{ msg }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="text-center mb-4 fw-bold">Login</h2>
 
-<form method="POST">
-    <input type="email" name="email" class="form-control mb-2" placeholder="Email" required>
-    <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
-    <button class="btn btn-primary">Login</button>
-</form>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for msg in messages %}
+                      <div class="alert alert-danger">{{ msg }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
 
-<p class="mt-2">
-    Don't have an account?
-    <a href="{{ url_for('register') }}">Register here</a>
-</p>
+                <form method="POST">
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    
+                    <div class="input-group mb-4">
+                        <input type="password" name="password" id="myPassword" class="form-control" placeholder="Password" required>
+                        <button class="btn btn-outline-secondary" type="button" id="toggleBtn" onclick="togglePassword()" style="min-width: 80px;">
+                            Show
+                        </button>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 py-2 mb-3">Login</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p class="text-muted mb-1">Don't have an account?</p>
+                    <a href="{{ url_for('register') }}" class="text-decoration-none fw-bold">Register here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function togglePassword() {
+    var passInput = document.getElementById("myPassword");
+    var toggleBtn = document.getElementById("toggleBtn");
+    
+    if (passInput.type === "password") {
+        passInput.type = "text";
+        toggleBtn.textContent = "Hide";
+    } else {
+        passInput.type = "password";
+        toggleBtn.textContent = "Show";
+    }
+}
+</script>
+{% endblock %}
