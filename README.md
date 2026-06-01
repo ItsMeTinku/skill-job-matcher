@@ -23,7 +23,7 @@ An AI-powered HR-tech platform that analyzes candidate skills, compares them aga
 </div>
 
 ---
-# the new versions of this project is also available 
+# The new versions of this project is also available 
 ## 📌 Table of Contents
 
 - Abstract
