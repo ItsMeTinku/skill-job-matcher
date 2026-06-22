@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 AI Skill Job Matcher
+#  AI Skill Job Matcher
 ### Intelligent Career Gap Analysis & Job Recommendation Platform
 
 <p align="center">
