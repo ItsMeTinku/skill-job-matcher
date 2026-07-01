@@ -59,7 +59,7 @@ Instead of simply listing jobs, the platform acts as a decision-support engine f
 
 ---
 
-## ❗ Problem Statement
+##  Problem Statement
 
 Most job seekers do not know:
 
