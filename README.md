@@ -17,7 +17,7 @@ An AI-powered HR-tech platform that analyzes candidate skills, compares them aga
 </p>
 
 <p align="center">
-🌐 <a href="https://skill-job-matcher.onrender.com">Live Demo</a> • ⭐ Star this Repo • 🍴 Fork & Explore
+🌐 <a href="https://skill-job-matcher.onrender.com">Live Demo</a> • ⭐ Star this Repo •  Fork & Explore
 </p>
 
 </div>
