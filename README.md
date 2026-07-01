@@ -44,7 +44,7 @@ An AI-powered HR-tech platform that analyzes candidate skills, compares them aga
 
 ---
 
-## 📖 Abstract
+##  Abstract
 
 AI Skill Job Matcher is a smart career intelligence and recruitment assistance platform developed to reduce the gap between candidate skillsets and real-world hiring expectations.
 
