@@ -74,7 +74,7 @@ This project solves that problem using intelligent skill-gap analysis.
 
 ---
 
-## 💡 Proposed Solution
+##  Proposed Solution
 
 The platform performs:
 
