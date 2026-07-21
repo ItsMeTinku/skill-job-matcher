@@ -154,4 +154,8 @@ skill-job-matcher/
 │   ├── result.html
 │   └── profile.html
 
+<div align="center">
 
+### Thanks for reading
+
+</div>
