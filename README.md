@@ -153,6 +153,7 @@ skill-job-matcher/
 │   ├── dashboard.html
 │   ├── result.html
 │   └── profile.html
+---
 
 ---
 
