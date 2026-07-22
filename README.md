@@ -153,8 +153,8 @@ skill-job-matcher/
 │   ├── dashboard.html
 │   ├── result.html
 │   └── profile.html
----
 
+---
 
 <div align="center">
 ### Thanks for reading
