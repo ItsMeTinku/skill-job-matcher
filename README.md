@@ -158,5 +158,5 @@ skill-job-matcher/
 
 <div align="center">
   
-### Thanks for reading 
+### Thanks for reading ❤️
 </div>
