@@ -159,4 +159,5 @@ skill-job-matcher/
 <div align="center">
   
 ### Thanks for reading ❤️
+* maded to guide students to cause right skills for thair dream job 
 </div>
