@@ -99,7 +99,7 @@ The platform performs:
 | ✅ Missing Skill Detector | Identify recruiter-required missing skills |
 | 💡 Skill Recommendation | Suggest high-value technologies to learn |
 | 📈 Improvement Tracking | Visual employability analytics |
-| 🔍 Job Filtering | Search multiple career roles |
+|  Job Filtering | Search multiple career roles |
 |  Editable Skill Dashboard | Update profile dynamically |
 |  Cloud Hosted | Deployable live web application |
 
