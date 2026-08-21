@@ -101,7 +101,7 @@ The platform performs:
 | 📈 Improvement Tracking | Visual employability analytics |
 | 🔍 Job Filtering | Search multiple career roles |
 | ✏️ Editable Skill Dashboard | Update profile dynamically |
-| ☁️ Cloud Hosted | Deployable live web application |
+|   Cloud Hosted | Deployable live web application |
 
 ---
 
