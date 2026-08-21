@@ -88,7 +88,7 @@ The platform performs:
 
 ---
 
-## 🚀 Core Features
+##  Core Features
 
 | Feature | Description |
 |---------|-------------|
