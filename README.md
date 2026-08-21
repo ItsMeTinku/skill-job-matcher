@@ -100,8 +100,8 @@ The platform performs:
 | 💡 Skill Recommendation | Suggest high-value technologies to learn |
 | 📈 Improvement Tracking | Visual employability analytics |
 | 🔍 Job Filtering | Search multiple career roles |
-| ✏️ Editable Skill Dashboard | Update profile dynamically |
-|   Cloud Hosted | Deployable live web application |
+|  Editable Skill Dashboard | Update profile dynamically |
+|  Cloud Hosted | Deployable live web application |
 
 ---
 
